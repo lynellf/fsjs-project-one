@@ -1,13 +1,8 @@
-// Create an array of JavaScript objects to hold the data for your quotes. Name the array quotes.
-// The quotes array should be accessible in the global scope.
-
 // Each quote object in the quotes array should have the following properties:
-    // A quote property which contains a string: the text of the quote that will be displayed on the page.
-    // A source property which contains a string identifying the creator of the quote. For example: "Mark Twain" or "Traditional Irish proverb.”
-    // An optional citation property which contains a string identifying where the quote comes from, 
-    // like a speech or publication. For example, "Famous Anonymous Jokes." If there is no known publication, do not include this property on the object.
-    // An optional year property which contains a number identifying the date of the quote. 
-    // For example, 1997. If there is no known date, then do not include this property on the object.
+    // A quote property 
+    // A source property 
+    // A citation property (optional)
+    // A year property  (optional)
 
 const quotes = 
 [
@@ -34,7 +29,7 @@ const quotes =
     }
 ],
 
-// Create a function named getRandomQuote which:
+// The function named getRandomQuote which:
     // selects a random quote object from the quotes array
     // returns the randomly selected quote object
 
@@ -45,25 +40,19 @@ const quotes =
         return array[randomNum];
     },
 
-// Create a function named printQuote which follows these rules:
-    // printQuote calls the getRandomQuote function and stores the returned quote object in a variable
-    // printQuote constructs a string containing the different properties of the quote object using the following HTML template:
-    /*
-    <p class = "quote" > [quote here] </p>
-    <p class = "source"> [source here] 
-        <span class = "citation" > [citation here] </span> 
-        <span class = "year"> [year here] </span> 
-    </p>
-    */
-    // printQuote doesn't add a for a missing citation or a if the year property is missing
-    // printQuote displays the final HTML string to the page. 
-    // You can use this JS snippet to accomplish that: document.getElementById('quote-box').innerHTML
-
     printQuote = () => {
+         // printQuote calls the getRandomQuote function and stores the returned quote object in a variable
         const quote = getRandomQuote(quotes),
+        rgbaMin = 0,
+        rgbaMax = 250,
+        body = document.querySelector('body');
         quoteBox = document.querySelector('#quote-box');
-        let quoteHtml;
+        let quoteHtml,
+        randomColor1 = Math.floor(Math.random() * (rgbaMax - rgbaMin) + rgbaMin),
+        randomColor2 = Math.floor(Math.random() * (rgbaMax - rgbaMin) + rgbaMin),
+        randomColor3 = Math.floor(Math.random() * (rgbaMax - rgbaMin) + rgbaMin);
 
+        // printQuote doesn't add a for a missing citation or a if the year property is missing
         if(quote.citation === '') {
             quoteHtml = 
             `
@@ -93,8 +82,11 @@ const quotes =
     
             `;
         }
-
+        // printQuote displays the final HTML string to the page.
         quoteBox.innerHTML = quoteHtml;
+
+        // random background color for each quote
+        body.style.backgroundColor = `rgba(${randomColor1}, ${randomColor2}, ${randomColor3})`;
 
     }
 
@@ -117,3 +109,8 @@ const quotes =
 // event listener to respond to "Show another quote" button clicks
 // when user clicks anywhere on the button, the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+
+setInterval(() => {
+    const seconds = 5;
+    printQuote();
+}, (5 * 1000));
