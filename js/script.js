@@ -42,6 +42,8 @@ const quotes =
 
     printQuote = () => {
          // printQuote calls the getRandomQuote function and stores the returned quote object in a variable
+         // printQuote generates three separate rgb values up to 250. 
+            // 255, 255, 255, is all white which would clash with the text.
         const quote = getRandomQuote(quotes),
         rgbaMin = 0,
         rgbaMax = 250,
@@ -90,27 +92,12 @@ const quotes =
 
     }
 
-// Add comments to your code.
-
-/////////////////
-//
-// Extra Credit
-/////////////////
-
-// Add more properties to the quote object. 
-// For example, a tags property could include a list of "tags" like "humor", "business", or "politics" to categorize each quote.
-
-// When the quote changes, randomly change the background color of the page.
-
-// Refresh the quote after a set amount of time. For example, every 30 seconds, make a new
-// quote appear. (You can use the setInterval() or setTimeout() method to do this -- see the links
-// in the “Additional Resources” section).
-
 // event listener to respond to "Show another quote" button clicks
 // when user clicks anywhere on the button, the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
 
+// printQuote function is called at 5 second intervals.
+
 setInterval(() => {
-    const seconds = 5;
     printQuote();
 }, (5 * 1000));
