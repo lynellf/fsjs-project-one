@@ -112,4 +112,4 @@ document.getElementById('loadQuote').addEventListener("click", printQuote, false
 
 setInterval(() => {
     printQuote();
-}, (5 * 1000));
+}, (10 * 1000));
